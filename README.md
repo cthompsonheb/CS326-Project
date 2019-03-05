@@ -4,7 +4,7 @@ Rename the above with the name of your application.
 
 # Overview
 
-Add an overview of your application here.
+A simple online journal application that lets the user log daily journal entries. Each day, the application will open with a blank journal page on which a user can record daily events, thoughts, or anything that comes to mind. At the end of the day, the application stores the dated journal entry for the day and refreshes the page with a new blank journal. Users can review any previous journal entries and edit or delete them. 
 
 # Team Members
 
