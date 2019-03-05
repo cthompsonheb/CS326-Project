@@ -1,4 +1,4 @@
-# Application Name
+# U-Journal? (Work in progress)
 
 Rename the above with the name of your application.
 
@@ -8,7 +8,10 @@ Add an overview of your application here.
 
 # Team Members
 
-Add the team member names who are working on this application.
+- Connor Thompson-Hebert
+- Brian Rooney
+- Ryan Sheehan
+- Amish Mathews
 
 # Application Initialization
 
