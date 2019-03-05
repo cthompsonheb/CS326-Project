@@ -6,7 +6,7 @@ const state = [
 // This grabs the DOM element to be used to mount React components.
 var contentNode = document.getElementById("contents");
 
-class MyComponent extends React.Component {
+class JournalEntry extends React.Component {
   constructor() {
     super();
   }
@@ -14,11 +14,13 @@ class MyComponent extends React.Component {
   render() {
     return (
       <div>
-        <h1>My View 01</h1>
+        <h1>Current Journal Entry</h1>
+        <textarea rows="40" cols="80" placeholder="Write anything here..." spellcheck="true">
+        </textarea>
       </div>
     );
   }
 }
 
 // This renders the JSX component inside the content node:
-ReactDOM.render(<MyComponent />, contentNode);
+ReactDOM.render(<JournalEntry />, contentNode);
