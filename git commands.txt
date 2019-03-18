@@ -1,0 +1,9 @@
+git checkout -b branch-name #create new branch with branch-name
+git checkout branch-name #switch to branch branch-name
+git pull origin master #pull from master
+git pull #pull from current branch
+git add . #stage all files to be committed
+git commit -m "commit message" #commit changes to be pushed
+git push origin branch-name #pushes to branch-name
+git push origin master #DON'T do this (commits directly to master)
+git status #check the status of your current working branch/see any changes
