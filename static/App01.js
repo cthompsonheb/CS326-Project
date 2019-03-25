@@ -30,11 +30,36 @@ var JournalEntry = function (_React$Component) {
         "div",
         null,
         React.createElement(
+          "button",
+          { type: "button" },
+          "Back"
+        ),
+        React.createElement(
           "h1",
           null,
-          "Current Journal Entry"
+          "Title"
         ),
-        React.createElement("textarea", { rows: "40", cols: "80", placeholder: "Write anything here...", spellcheck: "true" })
+        React.createElement(
+          "h2",
+          null,
+          "Date"
+        ),
+        React.createElement(
+          "textarea",
+          { rows: "40", cols: "80", spellcheck: "true", readOnly: true },
+          "Journal Entry Goes Here. Have a good day"
+        ),
+        React.createElement("br", null),
+        React.createElement(
+          "button",
+          { type: "button" },
+          "Edit"
+        ),
+        React.createElement(
+          "button",
+          { type: "button" },
+          "Delete"
+        )
       );
     }
   }]);
