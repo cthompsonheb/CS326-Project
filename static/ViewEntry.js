@@ -12,7 +12,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var state = {
   current_text: "",
   date: "Today",
-  title: ""
+  title: "An Existing Journal Entry",
+  read: 1
 };
 
 var style = {
@@ -27,21 +28,21 @@ var style = {
   // This grabs the DOM element to be used to mount React components.
 };var contentNode = document.getElementById("contents");
 
-var EditEntry = function (_React$Component) {
-  _inherits(EditEntry, _React$Component);
+var ViewEntry = function (_React$Component) {
+  _inherits(ViewEntry, _React$Component);
 
-  function EditEntry() {
-    _classCallCheck(this, EditEntry);
+  function ViewEntry() {
+    _classCallCheck(this, ViewEntry);
 
-    var _this = _possibleConstructorReturn(this, (EditEntry.__proto__ || Object.getPrototypeOf(EditEntry)).call(this));
+    var _this = _possibleConstructorReturn(this, (ViewEntry.__proto__ || Object.getPrototypeOf(ViewEntry)).call(this));
 
     _this.state = state;
-    _this.getDate = _this.getDate.bind(_this);
-    _this.onsave = _this.onSave.bind(_this);
+    _this.onEdit = _this.onEdit.bind(_this);
+    _this.onSave = _this.onSave.bind(_this);
     return _this;
   }
 
-  _createClass(EditEntry, [{
+  _createClass(ViewEntry, [{
     key: "getDate",
     value: function getDate() {
       var date = new Date();
@@ -60,20 +61,23 @@ var EditEntry = function (_React$Component) {
       return newDate;
     }
   }, {
+    key: "onEdit",
+    value: function onEdit() {
+      this.setState({ read: 0 });
+    }
+  }, {
     key: "onSave",
     value: function onSave() {
       var Ndate = "Saved: " + this.getDate();
       var Ntitle = document.getElementById("titlebox").value;
       var Nwords = document.getElementById("entrybox").value;
-      this.setState({ title: Ntitle, current_text: Nwords, date: Ndate });
-      //alert("Saved!");
+      this.setState({ title: Ntitle, current_text: Nwords, date: Ndate, read: 1 });
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      console.log(this.state);
       var viewLink = "./PreviousEntriesView.html";
 
       return React.createElement(
@@ -82,21 +86,28 @@ var EditEntry = function (_React$Component) {
         React.createElement(
           "h1",
           { style: style.title },
-          "Edit Journal Entry"
+          "View Journal Entry"
         ),
         React.createElement(
           "p",
           { style: style.date },
           this.state.date
         ),
-        React.createElement("textarea", { rows: "1", id: "titlebox", cols: "80", placeholder: "Write a title here..." }),
-        React.createElement("textarea", { rows: "40", id: "entrybox", cols: "80", placeholder: "Write anything here..." }),
+        React.createElement("textarea", { rows: "1", id: "titlebox", cols: "80", defaultValue: "Existing Journal Entry", readOnly: this.state.read }),
+        React.createElement("textarea", { rows: "40", id: "entrybox", cols: "80", defaultValue: "This is an example entry. Look at all this fun text. Try to edit me.", readOnly: this.state.read }),
         React.createElement(
           "button",
           { style: style.button, onClick: function onClick() {
               window.location = viewLink;
             } },
           "Previous Entries"
+        ),
+        React.createElement(
+          "button",
+          { style: style.button, onClick: function onClick() {
+              _this2.onEdit();
+            } },
+          "Edit"
         ),
         React.createElement(
           "button",
@@ -109,10 +120,10 @@ var EditEntry = function (_React$Component) {
     }
   }]);
 
-  return EditEntry;
+  return ViewEntry;
 }(React.Component);
 
 // This renders the JSX component inside the content node:
 
 
-ReactDOM.render(React.createElement(EditEntry, null), contentNode);
+ReactDOM.render(React.createElement(ViewEntry, null), contentNode);

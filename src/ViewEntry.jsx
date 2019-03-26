@@ -2,7 +2,8 @@
 const state = {
   current_text: "",
   date: "Today",
-  title: ""
+  title: "An Existing Journal Entry",
+  read: 1
 };
 
 const style = {
@@ -18,12 +19,12 @@ const style = {
 // This grabs the DOM element to be used to mount React components.
 var contentNode = document.getElementById("contents");
 
-class EditEntry extends React.Component {
+class ViewEntry extends React.Component {
   constructor() {
     super();
     this.state = state;
-    this.getDate = this.getDate.bind(this);
-    this.onsave = this.onSave.bind(this);
+    this.onEdit = this.onEdit.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   getDate() {
@@ -43,27 +44,30 @@ class EditEntry extends React.Component {
     return newDate;
   }
 
+  onEdit() {
+    this.setState({read: 0});
+  }
+
   onSave() {
     const Ndate = "Saved: " + this.getDate();
     const Ntitle = document.getElementById("titlebox").value;
     const Nwords = document.getElementById("entrybox").value;
-    this.setState({title: Ntitle, current_text:Nwords, date: Ndate});
-    //alert("Saved!");
+    this.setState({title: Ntitle, current_text:Nwords, date: Ndate, read: 1});
   }
 
   render() {
-    console.log(this.state);
     const viewLink = "./PreviousEntriesView.html";
 
     return (
       <div style={style.entryBox}>
-        <h1 style={style.title}>Edit Journal Entry</h1>
+        <h1 style={style.title}>View Journal Entry</h1>
         <p style={style.date}>{this.state.date}</p>
-        <textarea rows="1" id="titlebox" cols="80" placeholder="Write a title here..." >
+        <textarea rows="1" id="titlebox" cols="80" defaultValue="Existing Journal Entry" readOnly={this.state.read}>
         </textarea>
-        <textarea rows="40" id="entrybox" cols="80" placeholder="Write anything here...">
+        <textarea rows="40" id="entrybox" cols="80" defaultValue="This is an example entry. Look at all this fun text. Try to edit me." readOnly={this.state.read}>
         </textarea>
       <button style={style.button} onClick={() => {window.location=viewLink}}>Previous Entries</button>
+      <button style={style.button} onClick={() => {this.onEdit()}}>Edit</button>
       <button style={style.button} onClick={() => {this.onSave()}}>Save</button>
       </div>
     );
@@ -71,4 +75,4 @@ class EditEntry extends React.Component {
 }
 
 // This renders the JSX component inside the content node:
-ReactDOM.render(<EditEntry />, contentNode);
+ReactDOM.render(<ViewEntry />, contentNode);
