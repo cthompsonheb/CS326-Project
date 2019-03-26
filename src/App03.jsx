@@ -42,7 +42,7 @@ class JournalEntry extends React.Component {
     const EditLink = "./EditView.html";
     return (
       <div style={style.entryBox}>
-        <h1 style={style.title}>Current Journal Entry</h1>
+        <h1 style={style.title}>View Journal Entry</h1>
         <p style={style.date}>{this.state.date}</p>
         <textarea rows="40" id="entrybox" cols="80" placeholder="Write anything here..." readOnly>
         </textarea>
