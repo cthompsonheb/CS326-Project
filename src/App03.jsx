@@ -44,8 +44,6 @@ class JournalEntry extends React.Component {
       <div style={style.entryBox}>
         <h1 style={style.title}>Current Journal Entry</h1>
         <p style={style.date}>{this.state.date}</p>
-        <textarea rows="1" id="titlebox" cols="80" placeholder="Write a title here..." readOnly>
-        </textarea>
         <textarea rows="40" id="entrybox" cols="80" placeholder="Write anything here..." readOnly>
         </textarea>
       <button style={style.button} onClick={() => {window.location=viewLink}}>Previous Entries</button>
