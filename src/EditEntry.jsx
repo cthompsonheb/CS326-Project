@@ -7,7 +7,7 @@ const state = {
 
 const style = {
   entryBox: {
-
+    maxWidth: "45%"
   },
   button: {
     margin: "5px"
@@ -18,11 +18,12 @@ const style = {
 // This grabs the DOM element to be used to mount React components.
 var contentNode = document.getElementById("contents");
 
-class JournalEntry extends React.Component {
+class EditEntry extends React.Component {
   constructor() {
     super();
     this.state = state;
     this.getDate = this.getDate.bind(this);
+    this.onsave = this.onSave.bind(this);
   }
 
   getDate() {
@@ -32,26 +33,42 @@ class JournalEntry extends React.Component {
     let yyyy = date.getFullYear();
     let hh = date.getHours();
     let mmm = date.getMinutes();
-    let newDate =  mm + '/' + dd + '/' + yyyy + ' ' + hh + ':' + mmm;
+    let time = "AM";
+    if (hh > 12) {
+      hh -= 12;
+      time = "PM";
+    }
+    if (mmm < 10) mmm = "0" + mmm.toString()
+    let newDate =  mm + '/' + dd + '/' + yyyy + ' ' + hh + ':' + mmm + time;
     return newDate;
+  }
+
+  onSave() {
+    const Ndate = "Saved: " + this.getDate();
+    const Ntitle = document.getElementById("titlebox").value;
+    const Nwords = document.getElementById("entrybox").value;
+    this.setState({title: Ntitle, current_text:Nwords, date: Ndate});
+    //alert("Saved!");
   }
 
   render() {
     console.log(this.state);
     const viewLink = "./PreviousEntriesView.html";
-    const EditLink = "./EditView.html";
+
     return (
       <div style={style.entryBox}>
-        <h1 style={style.title}>View Journal Entry</h1>
+        <h1 style={style.title}>Edit Journal Entry</h1>
         <p style={style.date}>{this.state.date}</p>
-        <textarea rows="40" id="entrybox" cols="80" placeholder="Write anything here..." readOnly>
+        <textarea rows="1" id="titlebox" cols="80" placeholder="Write a title here..." >
+        </textarea>
+        <textarea rows="40" id="entrybox" cols="80" placeholder="Write anything here...">
         </textarea>
       <button style={style.button} onClick={() => {window.location=viewLink}}>Previous Entries</button>
-      <button style={style.button} onClick={() => {window.location=EditLink}}>Edit</button>
+      <button style={style.button} onClick={() => {this.onSave()}}>Save</button>
       </div>
     );
   }
 }
 
 // This renders the JSX component inside the content node:
-ReactDOM.render(<JournalEntry />, contentNode);
+ReactDOM.render(<EditEntry />, contentNode);
