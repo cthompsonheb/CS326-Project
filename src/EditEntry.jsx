@@ -7,7 +7,7 @@ const state = {
 
 const style = {
   entryBox: {
-
+    maxWidth: "45%"
   },
   button: {
     margin: "5px"
@@ -51,7 +51,7 @@ class JournalEntry extends React.Component {
     const EditLink = "./EditView.html";
     return (
       <div style={style.entryBox}>
-        <h1 style={style.title}>Current Journal Entry</h1>
+        <h1 style={style.title}>Edit Journal Entry</h1>
         <p style={style.date}>{this.state.date}</p>
         <textarea rows="1" id="titlebox" cols="80" placeholder="Write a title here..." >
         </textarea>

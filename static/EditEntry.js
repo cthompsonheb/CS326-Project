@@ -16,7 +16,9 @@ var state = {
 };
 
 var style = {
-  entryBox: {},
+  entryBox: {
+    maxWidth: "45%"
+  },
   button: {
     margin: "5px"
 
@@ -74,7 +76,7 @@ var JournalEntry = function (_React$Component) {
         React.createElement(
           "h1",
           { style: style.title },
-          "Current Journal Entry"
+          "Edit Journal Entry"
         ),
         React.createElement(
           "p",
