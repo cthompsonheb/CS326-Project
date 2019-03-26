@@ -14,16 +14,8 @@ class JournalEntry extends React.Component {
   render() {
     return (
       <div>
-        <button type="button">Back</button>
         <h1>Title</h1>
-        <h2>Date</h2>
-        <textarea rows="40" cols="80" spellcheck="true" readOnly>
-        Journal Entry Goes Here.
-        Have a good day
-        </textarea>
         <br></br>
-        <button type="button">Edit</button>
-        <button type="button">Delete</button>
       </div>
     );
   }
