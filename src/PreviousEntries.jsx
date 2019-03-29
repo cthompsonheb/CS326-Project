@@ -92,11 +92,13 @@ class PreviousEntriesList extends React.Component {
   render() {
     const entries = this.state.entries.map(entry =><EntriesListItem entry={entry} key={entry.id} onDelete={this.onDelete}/>);
     return (
-      <div style={style.list}>
+      <div style={{width: "80%", margin: "auto"}}>
         <h1>
           Previous Journal Entries
         </h1>
-        {entries}
+        <ul className="list-group">
+          {entries}
+        </ul>
       </div>
     );
   }
@@ -115,15 +117,15 @@ class EntriesListItem extends React.Component {
     const viewLink = "./JournalEntryView.html";
 
     return (
-      <div style={style.listItem}>
-        <h2>{props.entry.title}</h2>
-        <p>{props.entry.date}</p>
-        <div style={{display: "flex"}}>
-          <button style={style.button} onClick={() => props.onDelete(props.entry)}>Delete</button>
-          <button style={style.button} onClick={() => {window.location=editLink}}>Edit</button>
-          <button style={style.button} onClick={() => {window.location=viewLink}}>View</button>
+      <li className="list-group-item d-flex">
+        <h4>{props.entry.title}</h4>
+        <h4 className="ml-auto">{props.entry.date}</h4>
+        <div className="ml-auto">
+          <button type="button" className="btn btn-outline-danger mr-1" onClick={() => props.onDelete(props.entry)}>Delete</button>
+          <button type="button" className="btn btn-outline-primary mr-1" onClick={() => {window.location=editLink}}>Edit</button>
+          <button type="button" className="btn btn-outline-success" onClick={() => {window.location=viewLink}}>View</button>
         </div>
-      </div>
+      </li> 
     );
   }
 }
