@@ -109,13 +109,17 @@ var PreviousEntriesList = function (_React$Component) {
       });
       return React.createElement(
         "div",
-        { style: style.list },
+        { style: { width: "80%", margin: "auto" } },
         React.createElement(
           "h1",
           null,
           "Previous Journal Entries"
         ),
-        entries
+        React.createElement(
+          "ul",
+          { className: "list-group" },
+          entries
+        )
       );
     }
   }]);
@@ -142,38 +146,38 @@ var EntriesListItem = function (_React$Component2) {
       var viewLink = "./JournalEntryView.html";
 
       return React.createElement(
-        "div",
-        { style: style.listItem },
+        "li",
+        { className: "list-group-item d-flex" },
         React.createElement(
-          "h2",
+          "h4",
           null,
           props.entry.title
         ),
         React.createElement(
-          "p",
-          null,
+          "h4",
+          { className: "ml-auto" },
           props.entry.date
         ),
         React.createElement(
           "div",
-          { style: { display: "flex" } },
+          { className: "ml-auto" },
           React.createElement(
             "button",
-            { style: style.button, onClick: function onClick() {
+            { type: "button", className: "btn btn-outline-danger mr-1", onClick: function onClick() {
                 return props.onDelete(props.entry);
               } },
             "Delete"
           ),
           React.createElement(
             "button",
-            { style: style.button, onClick: function onClick() {
+            { type: "button", className: "btn btn-outline-primary mr-1", onClick: function onClick() {
                 window.location = editLink;
               } },
             "Edit"
           ),
           React.createElement(
             "button",
-            { style: style.button, onClick: function onClick() {
+            { type: "button", className: "btn btn-outline-success", onClick: function onClick() {
                 window.location = viewLink;
               } },
             "View"

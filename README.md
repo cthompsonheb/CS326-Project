@@ -1,6 +1,4 @@
-# U-Journal? (Work in progress)
-
-Rename the above with the name of your application.
+# JournalZ - A Note Taking Application
 
 # Overview
 
