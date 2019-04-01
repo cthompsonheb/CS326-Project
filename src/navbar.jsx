@@ -13,22 +13,22 @@ class NavigationBar extends React.Component {
 
   render() {
     return (
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-       <a class="navbar-brand" href="#">The Notebook</a>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+       <a className="navbar-brand" href="#">The Notebook</a>
+       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
   </button>
 
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-             <a class="nav-link" href="App01.jsx">Current Journal Entry</a>
+       <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+             <a className="nav-link" href="EditView.html">Current Journal Entry</a>
            </li>
-           <li class="nav-item">
-             <a class="nav-link" href="App02.jsx">Previous Entries</a>
+           <li className="nav-item">
+             <a className="nav-link" href="PreviousEntriesView.html">Previous Entries</a>
            </li>
-           <li class="nav-item">
-             <a class="nav-link" href="App03.jsx">Previous Journal Entry</a>
+           <li className="nav-item">
+             <a className="nav-link" href="JournalEntryView.html">Previous Journal Entry</a>
            </li>
          </ul>
         </div>
