@@ -28,47 +28,47 @@ var NavigationBar = function (_React$Component) {
     value: function render() {
       return React.createElement(
         "nav",
-        { "class": "navbar navbar-expand-lg navbar-light bg-light" },
+        { className: "navbar navbar-expand-lg navbar-light bg-light" },
         React.createElement(
           "a",
-          { "class": "navbar-brand", href: "#" },
+          { className: "navbar-brand", href: "#" },
           "The Notebook"
         ),
         React.createElement(
           "button",
-          { "class": "navbar-toggler", type: "button", "data-toggle": "collapse", "data-target": "#navbarSupportedContent", "aria-controls": "navbarSupportedContent", "aria-expanded": "false", "aria-label": "Toggle navigation" },
-          React.createElement("span", { "class": "navbar-toggler-icon" })
+          { className: "navbar-toggler", type: "button", "data-toggle": "collapse", "data-target": "#navbarSupportedContent", "aria-controls": "navbarSupportedContent", "aria-expanded": "false", "aria-label": "Toggle navigation" },
+          React.createElement("span", { className: "navbar-toggler-icon" })
         ),
         React.createElement(
           "div",
-          { "class": "collapse navbar-collapse", id: "navbarSupportedContent" },
+          { className: "collapse navbar-collapse", id: "navbarSupportedContent" },
           React.createElement(
             "ul",
-            { "class": "navbar-nav mr-auto" },
+            { className: "navbar-nav mr-auto" },
             React.createElement(
               "li",
-              { "class": "nav-item active" },
+              { className: "nav-item active" },
               React.createElement(
                 "a",
-                { "class": "nav-link", href: "App01.jsx" },
+                { className: "nav-link", href: "EditView.html" },
                 "Current Journal Entry"
               )
             ),
             React.createElement(
               "li",
-              { "class": "nav-item" },
+              { className: "nav-item" },
               React.createElement(
                 "a",
-                { "class": "nav-link", href: "App02.jsx" },
+                { className: "nav-link", href: "PreviousEntriesView.html" },
                 "Previous Entries"
               )
             ),
             React.createElement(
               "li",
-              { "class": "nav-item" },
+              { className: "nav-item" },
               React.createElement(
                 "a",
-                { "class": "nav-link", href: "App03.jsx" },
+                { className: "nav-link", href: "JournalEntryView.html" },
                 "Previous Journal Entry"
               )
             )
