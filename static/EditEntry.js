@@ -12,7 +12,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var state = {
   current_text: "",
   date: "Today",
-  title: ""
+  title: "",
+  id: 0
 };
 
 var style = {

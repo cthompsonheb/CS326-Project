@@ -2,8 +2,8 @@
 const state = {
   current_text: "",
   date: "Today",
-  title: ""
-  id: 0;
+  title: "",
+  id: 0
 };
 
 const style = {
