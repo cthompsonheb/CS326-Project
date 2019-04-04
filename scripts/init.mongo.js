@@ -13,7 +13,6 @@ db.entries.remove({});
 db.entries.insert(
 [
     {
-      id: 0,
       title: 'Christmas Morning',
       date: new Date('2018-12-25'),
       current_text: "Christmas is an annual festival, commemorating the birth of Jesus Christ, \
@@ -36,7 +35,6 @@ db.entries.insert(
       been adopted almost universally in the civil calendars used in countries throughout the world."
     },
     {
-      id: 1,
       title: 'A New Year',
       date: new Date('2019-01-01'),
       current_text: "New Year is the time or day at which a new calendar year begins and the \
@@ -55,7 +53,6 @@ db.entries.insert(
       meant the various local dates for New Year's Day changed to using one fixed date, January 1."
     },
     {
-      id: 2,
       title: 'Why I Love Potatoes',
       date: new Date('2019-01-31'),
       current_text: "The potato is a starchy, tuberous crop from the perennial nightshade \
@@ -85,7 +82,6 @@ db.entries.insert(
       overall production as of 2014."
     },
     {
-      id: 3,
       title: 'Worst Valentine\'s Day Ever',
       date: new Date('2019-02-14'),
 	    current_text: "Valentine's Day, also called Saint Valentine's Day or the Feast of Saint \
@@ -106,7 +102,6 @@ db.entries.insert(
       of Geoffrey Chaucer in the 14th century, when the tradition of courtly love flourished."
     },
     {
-      id: 4,
       title: 'Blarney Blowout',
       date: new Date('2019-03-17'),
       current_text: "UMass Amherst is working to ensure the upcoming Blarney Blowout doesn't \
@@ -131,7 +126,6 @@ db.entries.insert(
       trying to be safe and be more considerate of what has happened in the past,' Sam continued."
     },
     {
-      id: 5,
       title: 'An Ordinary Thursday',
       date: new Date('2019-04-04'),
       current_text: "Today I woke up. Then I ate some breakfast. I had a banana and toast. Then\
