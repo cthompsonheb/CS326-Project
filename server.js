@@ -45,7 +45,7 @@ app.get('/api/entries', (req, res) => {
 
 app.post('/api/entries', (req, res) => {
   const newEntry = req.body;
-  newEntry.date = new Date();
+
   const err = validateEntry(newEntry);
 
   if (err) {
@@ -53,6 +53,8 @@ app.post('/api/entries', (req, res) => {
     return;
   }
 
+  newEntry.date = new Date();
+  
   db.collection('entries').insertOne(newEntry).then(result =>
     db.collection('entries').find({ _id: result.insertedId }).limit(1).next()
   ).then(newEntry => {
