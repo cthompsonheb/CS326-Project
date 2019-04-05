@@ -1,83 +1,46 @@
-// This is a place holder for the initial application state.
-const state = {
-  entries: [
-    {
-      id: 0,
-      title: "Example Entry 1",
-      date: "1/1/2019"
-    },
-    {
-      id: 1,
-      title: "Example Entry 2",
-      date: "2/2/2019"
-    },
-    {
-      id: 2,
-      title: "Example Entry 3",
-      date: "3/3/2019"
-    },
-    {
-      id: 3,
-      title: "Example Entry 4",
-      date: "4/4/2019"
-    },
-    {
-      id: 4,
-      title: "Example Entry 5",
-      date: "5/5/2019"
-    },
-    {
-      id: 5,
-      title: "Example Entry 6",
-      date: "6/6/2019"
-    }
-  ]
-};
-
-//Placeholder for styling
-const style = {
-  list: {
-    display: "flex",
-    flexWrap: "wrap",
-    //overflow: "auto", <-- makes the div itself scrollable
-    width: "70%",
-    margin: "0 auto",
-    maxHeight: "98vh",
-    fontFamily: "Arial"
-  },
-  listItem: {
-    display: "flex", 
-    width: "100%",
-    justifyContent: "space-between", 
-    border: "solid 1px black", 
-    borderRadius: "10px",
-    alignItems: "center",
-    marginBottom: "15px",
-    paddingLeft: "5px"
-  },
-  button: {
-    margin: "5px"
-  }
-}
-
 // This grabs the DOM element to be used to mount React components.
 var contentNode = document.getElementById("contents");
 
 class PreviousEntriesList extends React.Component {
   constructor() {
     super();
-    this.state = state;
+    this.state = {
+      entries: []
+    };
 
-    this.getDate = this.getDate.bind(this);
+    this.formatDate = this.formatDate.bind(this);
     this.onDelete = this.onDelete.bind(this);
   }
 
-  getDate() {
-    const date = new Date();
-    let dd = String(date.getDate()).padStart(2, '0');
-    let mm = String(date.getMonth() + 1).padStart(2, '0'); 
-    let yyyy = date.getFullYear();
-    return mm + '/' + dd + '/' + yyyy;
+  componentDidMount() {
+    this.loadData();
+  }
+
+  loadData() {
+    fetch(`/api/entries`).then(response => {
+      if (response.ok) {
+        response.json().then(data => {
+          console.log("Total count of entries:", data._metadata.total_count);
+          data.entries.forEach(entry => {
+            entry.date = this.formatDate(entry.date);
+          });
+          this.setState({ entries: data.entries });
+        });
+      } else {
+        response.json().then(error => {
+          alert("Failed to fetch entries:" + error.message)
+        });
+      }
+    }).catch(err => {
+      alert("Error in fetching data from server:", err);
+    });
+  }
+
+  formatDate(date) {
+    let dd = date.substring(8, 10);
+    let mm = date.substring(5, 7);
+    let yyyy = date.substring(0,4);
+    return mm + '-' + dd + '-' + yyyy;
   }
 
   onDelete(entry) {
@@ -90,7 +53,7 @@ class PreviousEntriesList extends React.Component {
   }
 
   render() {
-    const entries = this.state.entries.map(entry =><EntriesListItem entry={entry} key={entry.id} onDelete={this.onDelete}/>);
+    const entries = this.state.entries.map(entry =><EntriesListItem entry={entry} key={entry._id} onDelete={this.onDelete}/>);
     return (
       <div style={{width: "80%", margin: "auto"}}>
         <h1>
@@ -117,10 +80,14 @@ class EntriesListItem extends React.Component {
     const viewLink = "./JournalEntryView.html";
 
     return (
-      <li className="list-group-item d-flex">
-        <h4>{props.entry.title}</h4>
-        <h4 className="ml-auto">{props.entry.date}</h4>
-        <div className="ml-auto">
+      <li className="list-group-item d-flex justify-content-between">
+        <div>
+          <h4>{props.entry.title}</h4>
+        </div>
+        <div className="ml-auto" style={{width: "35%"}}>
+          <h4>{props.entry.date}</h4>
+        </div>
+        <div>
           <button type="button" className="btn btn-outline-danger mr-1" onClick={() => props.onDelete(props.entry)}>Delete</button>
           <button type="button" className="btn btn-outline-primary mr-1" onClick={() => {window.location=editLink}}>Edit</button>
           <button type="button" className="btn btn-outline-success" onClick={() => {window.location=viewLink}}>View</button>
