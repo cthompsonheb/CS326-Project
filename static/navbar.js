@@ -32,7 +32,7 @@ var NavigationBar = function (_React$Component) {
         React.createElement(
           "a",
           { className: "navbar-brand", href: "#" },
-          "The Notebook"
+          "JournalZ"
         ),
         React.createElement(
           "button",
@@ -47,7 +47,7 @@ var NavigationBar = function (_React$Component) {
             { className: "navbar-nav mr-auto" },
             React.createElement(
               "li",
-              { className: "nav-item active" },
+              { className: "nav-item" },
               React.createElement(
                 "a",
                 { className: "nav-link", href: "EditView.html" },
