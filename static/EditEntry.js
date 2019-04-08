@@ -8,13 +8,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// This is a place holder for the initial application state.
-var state = {
-  current_text: "",
-  date: "Today",
-  title: ""
-};
-
 var style = {
   entryBox: {
     maxWidth: "45%"
@@ -35,13 +28,37 @@ var EditEntry = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (EditEntry.__proto__ || Object.getPrototypeOf(EditEntry)).call(this));
 
-    _this.state = state;
+    _this.state = {
+      title: "",
+      current_text: "",
+      date: "Today"
+    };
     _this.getDate = _this.getDate.bind(_this);
     _this.onsave = _this.onSave.bind(_this);
+    _this.createEntry = _this.createEntry.bind(_this);
     return _this;
   }
 
   _createClass(EditEntry, [{
+    key: "createEntry",
+    value: function createEntry(newEntry) {
+      fetch('/api/entries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEntry)
+      }).then(function (res) {
+        if (res.ok) {
+          res.json().then(function (updatedEntry) {
+            //updatedEntry.date = new Date(updatedEntry.date);
+          });
+        } else {
+          res.json().then(function (error) {
+            alert('Failed to add entry: ' + error.message);
+          });
+        }
+      });
+    }
+  }, {
     key: "getDate",
     value: function getDate() {
       var date = new Date();
@@ -62,20 +79,26 @@ var EditEntry = function (_React$Component) {
   }, {
     key: "onSave",
     value: function onSave() {
-      var Ndate = "Saved: " + this.getDate();
-      var Ntitle = document.getElementById("titlebox").value;
-      var Nwords = document.getElementById("entrybox").value;
-      this.setState({ title: Ntitle, current_text: Nwords, date: Ndate });
+      var newDate = "Saved: " + this.getDate();
+      var newTitle = document.getElementById("titlebox").value;
+      var newCurrentText = document.getElementById("entrybox").value;
+      this.setState({ title: newTitle, current_text: newCurrentText, date: newDate });
       //alert("Saved!");
+      this.createEntry({
+        title: newTitle,
+        current_text: newCurrentText,
+        created: new Date()
+      });
+      // Clear the entry for the next input.
+      // document.getElementById("titlebox").value = "";
+      // document.getElementById("entrybox").value = "";
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      console.log(this.state);
       var viewLink = "./PreviousEntriesView.html";
-
       return React.createElement(
         "div",
         { style: style.entryBox },

@@ -1,10 +1,3 @@
-// This is a place holder for the initial application state.
-const state = {
-  current_text: "",
-  date: "Today",
-  title: ""
-};
-
 const style = {
   entryBox: {
     maxWidth: "45%"
@@ -21,9 +14,36 @@ var contentNode = document.getElementById("contents");
 class EditEntry extends React.Component {
   constructor() {
     super();
-    this.state = state;
+    this.state = {
+      title: "",
+      current_text: "",
+      date: "Today"
+    };
     this.getDate = this.getDate.bind(this);
     this.onsave = this.onSave.bind(this);
+    this.createEntry = this.createEntry.bind(this);
+  }
+
+  createEntry(newEntry) {
+    fetch('/api/entries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newEntry),
+    })
+      .then(res => {
+        if (res.ok) {
+          res.json()
+            .then(updatedEntry => {
+              //updatedEntry.date = new Date(updatedEntry.date);
+            });
+        }
+        else {
+          res.json()
+            .then(error => {
+              alert('Failed to add entry: ' + error.message);
+            });
+        }
+      });
   }
 
   getDate() {
@@ -44,17 +64,23 @@ class EditEntry extends React.Component {
   }
 
   onSave() {
-    const Ndate = "Saved: " + this.getDate();
-    const Ntitle = document.getElementById("titlebox").value;
-    const Nwords = document.getElementById("entrybox").value;
-    this.setState({title: Ntitle, current_text:Nwords, date: Ndate});
+    const newDate = "Saved: " + this.getDate();
+    const newTitle = document.getElementById("titlebox").value;
+    const newCurrentText = document.getElementById("entrybox").value;
+    this.setState({title: newTitle, current_text: newCurrentText, date: newDate});
     //alert("Saved!");
+    this.createEntry({
+      title: newTitle,
+      current_text: newCurrentText,
+      created: new Date(),
+    });
+    // Clear the entry for the next input.
+    // document.getElementById("titlebox").value = "";
+    // document.getElementById("entrybox").value = "";
   }
 
   render() {
-    console.log(this.state);
     const viewLink = "./PreviousEntriesView.html";
-
     return (
       <div style={style.entryBox}>
         <h1 style={style.title}>Edit Journal Entry</h1>

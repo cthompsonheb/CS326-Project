@@ -8,62 +8,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// This is a place holder for the initial application state.
-var state = {
-  entries: [{
-    id: 0,
-    title: "Example Entry 1",
-    date: "1/1/2019"
-  }, {
-    id: 1,
-    title: "Example Entry 2",
-    date: "2/2/2019"
-  }, {
-    id: 2,
-    title: "Example Entry 3",
-    date: "3/3/2019"
-  }, {
-    id: 3,
-    title: "Example Entry 4",
-    date: "4/4/2019"
-  }, {
-    id: 4,
-    title: "Example Entry 5",
-    date: "5/5/2019"
-  }, {
-    id: 5,
-    title: "Example Entry 6",
-    date: "6/6/2019"
-  }]
-};
-
-//Placeholder for styling
-var style = {
-  list: {
-    display: "flex",
-    flexWrap: "wrap",
-    //overflow: "auto", <-- makes the div itself scrollable
-    width: "70%",
-    margin: "0 auto",
-    maxHeight: "98vh",
-    fontFamily: "Arial"
-  },
-  listItem: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "space-between",
-    border: "solid 1px black",
-    borderRadius: "10px",
-    alignItems: "center",
-    marginBottom: "15px",
-    paddingLeft: "5px"
-  },
-  button: {
-    margin: "5px"
-  }
-
-  // This grabs the DOM element to be used to mount React components.
-};var contentNode = document.getElementById("contents");
+// This grabs the DOM element to be used to mount React components.
+var contentNode = document.getElementById("contents");
 
 var PreviousEntriesList = function (_React$Component) {
   _inherits(PreviousEntriesList, _React$Component);
@@ -73,21 +19,55 @@ var PreviousEntriesList = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (PreviousEntriesList.__proto__ || Object.getPrototypeOf(PreviousEntriesList)).call(this));
 
-    _this.state = state;
+    _this.state = {
+      entries: []
+    };
 
-    _this.getDate = _this.getDate.bind(_this);
+    _this.formatDate = _this.formatDate.bind(_this);
     _this.onDelete = _this.onDelete.bind(_this);
+    _this.compareDate = _this.compareDate.bind(_this);
     return _this;
   }
 
   _createClass(PreviousEntriesList, [{
-    key: "getDate",
-    value: function getDate() {
-      var date = new Date();
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadData();
+    }
+  }, {
+    key: "loadData",
+    value: function loadData() {
+      var _this2 = this;
+
+      fetch("/api/entries").then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            console.log("Total count of entries:", data._metadata.total_count);
+            data.entries.sort(_this2.compareDate);
+            data.entries.forEach(function (entry) {
+              entry.date = _this2.formatDate(entry.date);
+            });
+            _this2.setState({ entries: data.entries });
+          });
+        } else {
+          response.json().then(function (error) {
+            alert("Failed to fetch entries:" + error.message);
+          });
+        }
+      }).catch(function (err) {
+        alert("Error in fetching data from server:", err);
+      });
+    }
+  }, {
+    key: "formatDate",
+    value: function formatDate(date) {
+      date = new Date(date);
       var dd = String(date.getDate()).padStart(2, '0');
       var mm = String(date.getMonth() + 1).padStart(2, '0');
       var yyyy = date.getFullYear();
-      return mm + '/' + dd + '/' + yyyy;
+
+      var newDate = mm + '/' + dd + '/' + yyyy;
+      return newDate;
     }
   }, {
     key: "onDelete",
@@ -100,24 +80,43 @@ var PreviousEntriesList = function (_React$Component) {
       this.setState({ entries: newEntries });
     }
   }, {
+    key: "compareDate",
+    value: function compareDate(a, b) {
+      if (a.date > b.date) return -1;
+      if (a.date < b.date) return 1;
+      return 0;
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
+      var homeLink = "./index.html";
       var entries = this.state.entries.map(function (entry) {
-        return React.createElement(EntriesListItem, { entry: entry, key: entry.id, onDelete: _this2.onDelete });
+        return React.createElement(EntriesListItem, { entry: entry, key: entry._id, onDelete: _this3.onDelete });
       });
       return React.createElement(
         "div",
-        { style: { width: "80%", margin: "auto" } },
+        { className: "d-flex-row justify-content-between", style: { width: "80%", margin: "auto" } },
         React.createElement(
-          "h1",
-          null,
-          "Previous Journal Entries"
+          "div",
+          { className: "d-flex mt-3" },
+          React.createElement(
+            "h1",
+            null,
+            "Previous Journal Entries"
+          ),
+          React.createElement(
+            "button",
+            { style: { marginLeft: "auto" }, type: "button", className: "btn btn-primary", onClick: function onClick() {
+                window.location = homeLink;
+              } },
+            "Home"
+          )
         ),
         React.createElement(
           "ul",
-          { className: "list-group" },
+          { className: "list-group mt-3" },
           entries
         )
       );
@@ -147,20 +146,28 @@ var EntriesListItem = function (_React$Component2) {
 
       return React.createElement(
         "li",
-        { className: "list-group-item d-flex" },
+        { className: "list-group-item d-flex justify-content-between" },
         React.createElement(
-          "h4",
+          "div",
           null,
-          props.entry.title
-        ),
-        React.createElement(
-          "h4",
-          { className: "ml-auto" },
-          props.entry.date
+          React.createElement(
+            "h4",
+            null,
+            props.entry.title
+          )
         ),
         React.createElement(
           "div",
-          { className: "ml-auto" },
+          { className: "ml-auto", style: { width: "35%" } },
+          React.createElement(
+            "h4",
+            null,
+            props.entry.date
+          )
+        ),
+        React.createElement(
+          "div",
+          null,
           React.createElement(
             "button",
             { type: "button", className: "btn btn-outline-danger mr-1", onClick: function onClick() {
