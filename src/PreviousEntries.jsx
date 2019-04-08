@@ -10,6 +10,7 @@ class PreviousEntriesList extends React.Component {
 
     this.formatDate = this.formatDate.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.compareDate = this.compareDate.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +22,7 @@ class PreviousEntriesList extends React.Component {
       if (response.ok) {
         response.json().then(data => {
           console.log("Total count of entries:", data._metadata.total_count);
+          data.entries.sort(this.compareDate)
           data.entries.forEach(entry => {
             entry.date = this.formatDate(entry.date);
           });
@@ -37,10 +39,13 @@ class PreviousEntriesList extends React.Component {
   }
 
   formatDate(date) {
-    let dd = date.substring(8, 10);
-    let mm = date.substring(5, 7);
-    let yyyy = date.substring(0,4);
-    return mm + '-' + dd + '-' + yyyy;
+    date = new Date(date);
+    let dd = String(date.getDate()).padStart(2, '0');
+    let mm = String(date.getMonth() + 1).padStart(2, '0'); 
+    let yyyy = date.getFullYear();
+
+    let newDate =  mm + '/' + dd + '/' + yyyy;
+    return newDate;
   }
 
   onDelete(entry) {
@@ -52,14 +57,26 @@ class PreviousEntriesList extends React.Component {
     this.setState({entries: newEntries})
   }
 
+  compareDate(a,b) {
+    if (a.date > b.date)
+      return -1;
+    if (a.date < b.date)
+      return 1;
+    return 0;
+  }
+
   render() {
+    const homeLink = "./index.html";
     const entries = this.state.entries.map(entry =><EntriesListItem entry={entry} key={entry._id} onDelete={this.onDelete}/>);
     return (
-      <div style={{width: "80%", margin: "auto"}}>
-        <h1>
-          Previous Journal Entries
-        </h1>
-        <ul className="list-group">
+      <div className="d-flex-row justify-content-between" style={{width: "80%", margin: "auto"}}>
+        <div className="d-flex mt-3">
+          <h1>
+            Previous Journal Entries
+          </h1>
+          <button style={{marginLeft: "auto"}} type="button" className="btn btn-primary" onClick={() => {window.location=homeLink}}>Home</button>
+        </div>
+        <ul className="list-group mt-3">
           {entries}
         </ul>
       </div>
@@ -92,7 +109,7 @@ class EntriesListItem extends React.Component {
           <button type="button" className="btn btn-outline-primary mr-1" onClick={() => {window.location=editLink}}>Edit</button>
           <button type="button" className="btn btn-outline-success" onClick={() => {window.location=viewLink}}>View</button>
         </div>
-      </li> 
+      </li>
     );
   }
 }

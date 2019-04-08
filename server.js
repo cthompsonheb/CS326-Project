@@ -56,7 +56,7 @@ app.post('/api/entries', (req, res) => {
   newEntry.date = new Date();
   
   db.collection('entries').insertOne(newEntry).then(result =>
-    db.collection('entries').find({ _id: result.insertedId }).limit(1).next()
+    db.collection('entries').find({ title: result.title }).limit(1).next()
   ).then(newEntry => {
     res.json(newEntry);
   }).catch(error => {

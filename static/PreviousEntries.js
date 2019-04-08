@@ -25,6 +25,7 @@ var PreviousEntriesList = function (_React$Component) {
 
     _this.formatDate = _this.formatDate.bind(_this);
     _this.onDelete = _this.onDelete.bind(_this);
+    _this.compareDate = _this.compareDate.bind(_this);
     return _this;
   }
 
@@ -42,6 +43,7 @@ var PreviousEntriesList = function (_React$Component) {
         if (response.ok) {
           response.json().then(function (data) {
             console.log("Total count of entries:", data._metadata.total_count);
+            data.entries.sort(_this2.compareDate);
             data.entries.forEach(function (entry) {
               entry.date = _this2.formatDate(entry.date);
             });
@@ -59,10 +61,13 @@ var PreviousEntriesList = function (_React$Component) {
   }, {
     key: "formatDate",
     value: function formatDate(date) {
-      var dd = date.substring(8, 10);
-      var mm = date.substring(5, 7);
-      var yyyy = date.substring(0, 4);
-      return mm + '-' + dd + '-' + yyyy;
+      date = new Date(date);
+      var dd = String(date.getDate()).padStart(2, '0');
+      var mm = String(date.getMonth() + 1).padStart(2, '0');
+      var yyyy = date.getFullYear();
+
+      var newDate = mm + '/' + dd + '/' + yyyy;
+      return newDate;
     }
   }, {
     key: "onDelete",
@@ -75,24 +80,43 @@ var PreviousEntriesList = function (_React$Component) {
       this.setState({ entries: newEntries });
     }
   }, {
+    key: "compareDate",
+    value: function compareDate(a, b) {
+      if (a.date > b.date) return -1;
+      if (a.date < b.date) return 1;
+      return 0;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
+      var homeLink = "./index.html";
       var entries = this.state.entries.map(function (entry) {
         return React.createElement(EntriesListItem, { entry: entry, key: entry._id, onDelete: _this3.onDelete });
       });
       return React.createElement(
         "div",
-        { style: { width: "80%", margin: "auto" } },
+        { className: "d-flex-row justify-content-between", style: { width: "80%", margin: "auto" } },
         React.createElement(
-          "h1",
-          null,
-          "Previous Journal Entries"
+          "div",
+          { className: "d-flex mt-3" },
+          React.createElement(
+            "h1",
+            null,
+            "Previous Journal Entries"
+          ),
+          React.createElement(
+            "button",
+            { style: { marginLeft: "auto" }, type: "button", className: "btn btn-primary", onClick: function onClick() {
+                window.location = homeLink;
+              } },
+            "Home"
+          )
         ),
         React.createElement(
           "ul",
-          { className: "list-group" },
+          { className: "list-group mt-3" },
           entries
         )
       );
