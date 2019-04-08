@@ -22,13 +22,13 @@ class NavigationBar extends React.Component {
        <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-             <a className="nav-link" href="EditView.html">Current Journal Entry</a>
+             <a className="nav-link" href="EditView.html">Edit Journal Entry</a>
            </li>
            <li className="nav-item">
              <a className="nav-link" href="PreviousEntriesView.html">Previous Entries</a>
            </li>
            <li className="nav-item">
-             <a className="nav-link" href="JournalEntryView.html">Previous Journal Entry</a>
+             <a className="nav-link" href="JournalEntryView.html">View Journal Entry</a>
            </li>
          </ul>
         </div>

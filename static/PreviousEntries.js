@@ -139,7 +139,6 @@ var EntriesListItem = function (_React$Component2) {
     key: "render",
     value: function render() {
       var props = this.props;
-
       //using these to simulate changing views with an onClick function
       var editLink = "./EditView.html";
       var viewLink = "./JournalEntryView.html";

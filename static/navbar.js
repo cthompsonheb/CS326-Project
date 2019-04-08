@@ -51,7 +51,7 @@ var NavigationBar = function (_React$Component) {
               React.createElement(
                 "a",
                 { className: "nav-link", href: "EditView.html" },
-                "Current Journal Entry"
+                "Edit Journal Entry"
               )
             ),
             React.createElement(
@@ -69,7 +69,7 @@ var NavigationBar = function (_React$Component) {
               React.createElement(
                 "a",
                 { className: "nav-link", href: "JournalEntryView.html" },
-                "Previous Journal Entry"
+                "View Journal Entry"
               )
             )
           )
