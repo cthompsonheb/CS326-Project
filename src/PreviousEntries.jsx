@@ -54,8 +54,31 @@ class PreviousEntriesList extends React.Component {
     if (index > -1) {
       newEntries.splice(index, 1);
     }
+
     this.setState({entries: newEntries})
   }
+
+  
+  deleteEntry(entry) {
+    fetch('/api/entries' + entry, {
+      method: 'DELETE',
+    })
+      .then(res => {
+        if (res.ok) {
+          res.json()
+            .then(res => {
+              res.json()
+            });
+        }
+        else {
+          res.json()
+            .then(error => {
+              alert('Failed to delete entry: ' + error.message);
+            });
+        }
+      });
+  }
+  
 
   compareDate(a,b) {
     if (a.date > b.date)

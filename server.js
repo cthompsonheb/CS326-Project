@@ -65,6 +65,14 @@ app.post('/api/entries', (req, res) => {
   });
 });
 
+app.delete('/api/entries', (req, res) => {
+    const dEntry = req.body._id;
+    db.collection('entries').remove({_id: dEntry}).catch(error => {
+      console.log(error);
+      res.status(500).json({ message: `Internal Server Error: ${error}` });
+    });
+});
+
 let db;
 MongoClient.connect('mongodb://localhost', { useNewUrlParser: true }).then(connection => {
   db = connection.db('JournalZ');
