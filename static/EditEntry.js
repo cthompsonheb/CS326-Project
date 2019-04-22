@@ -103,11 +103,6 @@ var EditEntry = function (_React$Component) {
         "div",
         { style: style.entryBox },
         React.createElement(
-          "h1",
-          { style: style.title },
-          "Edit Journal Entry"
-        ),
-        React.createElement(
           "p",
           { style: style.date },
           this.state.date

@@ -83,7 +83,6 @@ class EditEntry extends React.Component {
     const viewLink = "./PreviousEntriesView.html";
     return (
       <div style={style.entryBox}>
-        <h1 style={style.title}>Edit Journal Entry</h1>
         <p style={style.date}>{this.state.date}</p>
         <textarea rows="1" id="titlebox" cols="80" placeholder="Write a title here..." >
         </textarea>

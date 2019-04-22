@@ -70,12 +70,6 @@ class PreviousEntriesList extends React.Component {
     const entries = this.state.entries.map(entry =><EntriesListItem entry={entry} key={entry._id} onDelete={this.onDelete}/>);
     return (
       <div className="d-flex-row justify-content-between" style={{width: "80%", margin: "auto"}}>
-        <div className="d-flex mt-3">
-          <h1>
-            Previous Journal Entries
-          </h1>
-          <button style={{marginLeft: "auto"}} type="button" className="btn btn-primary" onClick={() => {window.location=homeLink}}>Home</button>
-        </div>
         <ul className="list-group mt-3">
           {entries}
         </ul>
