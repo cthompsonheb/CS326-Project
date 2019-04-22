@@ -1,4 +1,4 @@
-// NEW
+
 
 // Connect to the issuetracker database. Note, if the issuetracker database
 // does not exist, it will create it with this call.

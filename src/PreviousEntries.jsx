@@ -114,7 +114,6 @@ class EntriesListItem extends React.Component {
 
   render() {
     const props = this.props;
-
     //using these to simulate changing views with an onClick function
     const editLink = "./EditView.html";
     const viewLink = "./JournalEntryView.html";
