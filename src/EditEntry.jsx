@@ -1,10 +1,38 @@
 const style = {
-  entryBox: {
-    maxWidth: "45%"
+ root:{
+   backgroundImage: "url('http://sfwallpaper.com/images/wood-wallpaper-desktop-3.jpg')",
+   backgroundSize: 'cover',
+   overflow: "hidden"
+},
+ entryBox: {
+    maxWidth: "100%",
   },
   button: {
-    margin: "5px"
+    margin: "10px",   
+    width: "20%",
 
+  },
+  titlebox:{
+    width: "50%",
+    display: "block",
+    margin:"auto",
+    backgroundImage: "url('https://i.pinimg.com/originals/c1/8d/30/c18d30a8d6df0314a509fd551931e0d1.jpg')" ,
+    backgroundSize: 'cover',
+    overflow: "hidden"
+  },
+  textbox:{
+    width: "50%",
+    display: "block",
+    margin: "auto",
+    backgroundImage: "url('https://i.pinimg.com/originals/c1/8d/30/c18d30a8d6df0314a509fd551931e0d1.jpg')",
+    backgroundSize: 'cover',
+    overflow: "hidden" 
+  },
+  title:{
+    color:"white"
+  },
+  date:{
+    color:"white"
   }
 }
 
@@ -82,16 +110,22 @@ class EditEntry extends React.Component {
   render() {
     const viewLink = "./PreviousEntriesView.html";
     return (
-      <div style={style.entryBox}>
-        <h1 style={style.title}>Edit Journal Entry</h1>
-        <p style={style.date}>{this.state.date}</p>
-        <textarea rows="1" id="titlebox" cols="80" placeholder="Write a title here..." >
-        </textarea>
-        <textarea rows="40" id="entrybox" cols="80" placeholder="Write anything here...">
-        </textarea>
-      <button style={style.button} onClick={() => {window.location=viewLink}}>Previous Entries</button>
-      <button style={style.button} onClick={() => {this.onSave()}}>Save</button>
+    <div style={style.root}>
+      <div className="container" style={style.entryBox}>
+        <div className="mx-auto">
+          <h1 className="text-center" style={style.title}>Edit Journal Entry</h1>
+          <p className="text-center" style={style.date}>Last Opened: {this.getDate()}</p>
+          <textarea rows="1" style={style.titlebox} id="titlebox" cols="80" placeholder="Write a title here..." >
+            </textarea>
+          <textarea rows="40" style={style.textbox} id="entrybox" cols="80" placeholder="Write anything here...">
+            </textarea>
+          <div className="text-center"> 
+            <button  style={style.button} onClick={() => {window.location=viewLink}}>Previous Entries</button>
+            <button style={style.button} onClick={() => {this.onSave()}}>Save</button>
+          </div>
+        </div>
       </div>
+    </div>
     );
   }
 }
