@@ -1,6 +1,6 @@
 const style = {
  root:{
-   backgroundImage: "url('http://sfwallpaper.com/images/wood-wallpaper-desktop-3.jpg')",
+   backgroundImage: "url('https://cdn.hipwallpaper.com/i/12/15/g8VhaE.jpg')",
    backgroundSize: 'cover',
    overflow: "hidden"
 },
@@ -16,7 +16,7 @@ const style = {
     width: "50%",
     display: "block",
     margin:"auto",
-    backgroundImage: "url('https://i.pinimg.com/originals/c1/8d/30/c18d30a8d6df0314a509fd551931e0d1.jpg')" ,
+    backgroundImage: "url('https://wallpaperplay.com/walls/full/8/a/d/103355.jpg')" ,
     backgroundSize: 'cover',
     overflow: "hidden"
   },
@@ -24,12 +24,13 @@ const style = {
     width: "50%",
     display: "block",
     margin: "auto",
-    backgroundImage: "url('https://i.pinimg.com/originals/c1/8d/30/c18d30a8d6df0314a509fd551931e0d1.jpg')",
+    backgroundImage: "url('https://wallpaperplay.com/walls/full/8/a/d/103355.jpg')",
     backgroundSize: 'cover',
     overflow: "hidden" 
   },
   title:{
-    color:"white"
+    color:"white",
+    margin: "10px"
   },
   date:{
     color:"white"
@@ -110,6 +111,27 @@ class EditEntry extends React.Component {
   render() {
     const viewLink = "./PreviousEntriesView.html";
     return (
+    <div>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+       <a className="navbar-brand" href="#">JournalZ</a>
+       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+
+       <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+             <a className="nav-link" href="EditView.html">Edit Journal Entry</a>
+           </li>
+           <li className="nav-item">
+             <a className="nav-link" href="PreviousEntriesView.html">Previous Entries</a>
+           </li>
+           <li className="nav-item">
+             <a className="nav-link" href="JournalEntryView.html">View Journal Entry</a>
+           </li>
+         </ul>
+        </div>
+     </nav>
     <div style={style.root}>
       <div className="container" style={style.entryBox}>
         <div className="mx-auto">
@@ -125,6 +147,7 @@ class EditEntry extends React.Component {
           </div>
         </div>
       </div>
+    </div>
     </div>
     );
   }
