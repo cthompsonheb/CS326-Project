@@ -10,6 +10,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // This grabs the DOM element to be used to mount React components.
 var contentNode = document.getElementById("contents");
+var style = {
+  root: {
+    backgroundImage: "url('https://cdn.hipwallpaper.com/i/12/15/g8VhaE.jpg')",
+    backgroundSize: 'cover',
+    height: "-webkit-fill-available"
+  },
+  prevlist: {
+    height: "100%"
+  },
+  title: {
+    color: "white",
+    margin: "10px",
+    align: "center"
+  }
+};
 
 var PreviousEntriesList = function (_React$Component) {
   _inherits(PreviousEntriesList, _React$Component);
@@ -77,7 +92,25 @@ var PreviousEntriesList = function (_React$Component) {
       if (index > -1) {
         newEntries.splice(index, 1);
       }
+
       this.setState({ entries: newEntries });
+    }
+  }, {
+    key: "deleteEntry",
+    value: function deleteEntry(entry) {
+      fetch('/api/entries' + entry, {
+        method: 'DELETE'
+      }).then(function (res) {
+        if (res.ok) {
+          res.json().then(function (res) {
+            res.json();
+          });
+        } else {
+          res.json().then(function (error) {
+            alert('Failed to delete entry: ' + error.message);
+          });
+        }
+      });
     }
   }, {
     key: "compareDate",
@@ -97,27 +130,15 @@ var PreviousEntriesList = function (_React$Component) {
       });
       return React.createElement(
         "div",
-        { className: "d-flex-row justify-content-between", style: { width: "80%", margin: "auto" } },
+        { style: style.root },
         React.createElement(
           "div",
-          { className: "d-flex mt-3" },
+          { className: "d-flex-row justify-content-between", style: { width: "80%", margin: "auto" } },
           React.createElement(
-            "h1",
-            null,
-            "Previous Journal Entries"
-          ),
-          React.createElement(
-            "button",
-            { style: { marginLeft: "auto" }, type: "button", className: "btn btn-primary", onClick: function onClick() {
-                window.location = homeLink;
-              } },
-            "Home"
+            "ul",
+            { className: "list-group mt-3" },
+            entries
           )
-        ),
-        React.createElement(
-          "ul",
-          { className: "list-group mt-3" },
-          entries
         )
       );
     }
@@ -144,49 +165,53 @@ var EntriesListItem = function (_React$Component2) {
       var viewLink = "./JournalEntryView.html";
 
       return React.createElement(
-        "li",
-        { className: "list-group-item d-flex justify-content-between" },
+        "div",
+        null,
         React.createElement(
-          "div",
-          null,
+          "li",
+          { style: style.prevlist, className: "list-group-item d-flex justify-content-between" },
           React.createElement(
-            "h4",
+            "div",
             null,
-            props.entry.title
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "ml-auto", style: { width: "35%" } },
-          React.createElement(
-            "h4",
-            null,
-            props.entry.date
-          )
-        ),
-        React.createElement(
-          "div",
-          null,
-          React.createElement(
-            "button",
-            { type: "button", className: "btn btn-outline-danger mr-1", onClick: function onClick() {
-                return props.onDelete(props.entry);
-              } },
-            "Delete"
+            React.createElement(
+              "h4",
+              null,
+              props.entry.title
+            )
           ),
           React.createElement(
-            "button",
-            { type: "button", className: "btn btn-outline-primary mr-1", onClick: function onClick() {
-                window.location = editLink;
-              } },
-            "Edit"
+            "div",
+            { className: "ml-auto", style: { width: "35%" } },
+            React.createElement(
+              "h4",
+              null,
+              props.entry.date
+            )
           ),
           React.createElement(
-            "button",
-            { type: "button", className: "btn btn-outline-success", onClick: function onClick() {
-                window.location = viewLink;
-              } },
-            "View"
+            "div",
+            null,
+            React.createElement(
+              "button",
+              { type: "button", className: "btn btn-outline-danger mr-1", onClick: function onClick() {
+                  return props.onDelete(props.entry);
+                } },
+              "Delete"
+            ),
+            React.createElement(
+              "button",
+              { type: "button", className: "btn btn-outline-primary mr-1", onClick: function onClick() {
+                  window.location = editLink;
+                } },
+              "Edit"
+            ),
+            React.createElement(
+              "button",
+              { type: "button", className: "btn btn-outline-success", onClick: function onClick() {
+                  window.location = viewLink;
+                } },
+              "View"
+            )
           )
         )
       );
