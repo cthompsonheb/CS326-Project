@@ -1,5 +1,19 @@
 // This grabs the DOM element to be used to mount React components.
 var contentNode = document.getElementById("contents");
+const style = {
+   root:{
+   backgroundImage: "url('https://cdn.hipwallpaper.com/i/12/15/g8VhaE.jpg')",
+   backgroundSize: 'cover',
+   height:"-webkit-fill-available"
+   },
+   prevlist:{
+     height: "100%"
+   },
+   title:{
+    color:"white",
+    align: "center"
+  }
+};
 
 class PreviousEntriesList extends React.Component {
   constructor() {
@@ -54,8 +68,31 @@ class PreviousEntriesList extends React.Component {
     if (index > -1) {
       newEntries.splice(index, 1);
     }
+
     this.setState({entries: newEntries})
   }
+
+  
+  deleteEntry(entry) {
+    fetch('/api/entries' + entry, {
+      method: 'DELETE',
+    })
+      .then(res => {
+        if (res.ok) {
+          res.json()
+            .then(res => {
+              res.json()
+            });
+        }
+        else {
+          res.json()
+            .then(error => {
+              alert('Failed to delete entry: ' + error.message);
+            });
+        }
+      });
+  }
+  
 
   compareDate(a,b) {
     if (a.date > b.date)
@@ -69,10 +106,13 @@ class PreviousEntriesList extends React.Component {
     const homeLink = "./index.html";
     const entries = this.state.entries.map(entry =><EntriesListItem entry={entry} key={entry._id} onDelete={this.onDelete}/>);
     return (
+      <div style={style.root}>
       <div className="d-flex-row justify-content-between" style={{width: "80%", margin: "auto"}}>
+        <h1 className="text-center" style={style.title}>Previous Entries</h1>
         <ul className="list-group mt-3">
           {entries}
         </ul>
+      </div>
       </div>
     );
   }
@@ -90,7 +130,8 @@ class EntriesListItem extends React.Component {
     const viewLink = "./JournalEntryView.html";
 
     return (
-      <li className="list-group-item d-flex justify-content-between">
+      <div>
+      <li style = {style.prevlist} className="list-group-item d-flex justify-content-between">
         <div>
           <h4>{props.entry.title}</h4>
         </div>
@@ -103,6 +144,7 @@ class EntriesListItem extends React.Component {
           <button type="button" className="btn btn-outline-success" onClick={() => {window.location=viewLink}}>View</button>
         </div>
       </li>
+      </div>
     );
   }
 }

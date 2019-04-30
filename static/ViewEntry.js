@@ -17,12 +17,41 @@ var state = {
 };
 
 var style = {
+  root: {
+    backgroundImage: "url('https://cdn.hipwallpaper.com/i/12/15/g8VhaE.jpg')",
+    backgroundSize: '100%',
+    overflow: "hidden"
+  },
   entryBox: {
-    maxWidth: "45%"
+    maxWidth: "100%"
   },
   button: {
-    margin: "5px"
+    margin: "10px",
+    width: "15%"
 
+  },
+  titlebox: {
+    width: "50%",
+    display: "block",
+    margin: "auto",
+    backgroundImage: "url('https://wallpaperplay.com/walls/full/8/a/d/103355.jpg')",
+    backgroundSize: 'cover',
+    overflow: "hidden"
+  },
+  textbox: {
+    width: "50%",
+    display: "block",
+    margin: "auto",
+    backgroundImage: "url('https://wallpaperplay.com/walls/full/8/a/d/103355.jpg')",
+    backgroundSize: 'cover',
+    overflow: "hidden"
+  },
+  title: {
+    color: "white",
+    margin: "10px"
+  },
+  date: {
+    color: "white"
   }
 
   // This grabs the DOM element to be used to mount React components.
@@ -82,34 +111,55 @@ var ViewEntry = function (_React$Component) {
 
       return React.createElement(
         "div",
-        { style: style.entryBox },
+        null,
         React.createElement(
-          "p",
-          { style: style.date },
-          this.state.date
-        ),
-        React.createElement("textarea", { rows: "1", id: "titlebox", cols: "80", defaultValue: "Existing Journal Entry", readOnly: this.state.read }),
-        React.createElement("textarea", { rows: "40", id: "entrybox", cols: "80", defaultValue: "This is an example entry. Look at all this fun text. Try to edit me.", readOnly: this.state.read }),
-        React.createElement(
-          "button",
-          { style: style.button, onClick: function onClick() {
-              window.location = viewLink;
-            } },
-          "Previous Entries"
-        ),
-        React.createElement(
-          "button",
-          { style: style.button, onClick: function onClick() {
-              _this2.onEdit();
-            } },
-          "Edit"
-        ),
-        React.createElement(
-          "button",
-          { style: style.button, onClick: function onClick() {
-              _this2.onSave();
-            } },
-          "Save"
+          "div",
+          { style: style.root },
+          React.createElement(
+            "div",
+            { className: "container", style: style.entryBox },
+            React.createElement(
+              "div",
+              { className: "mx-auto" },
+              React.createElement(
+                "h1",
+                { className: "text-center", style: style.title },
+                "View Journal Entry"
+              ),
+              React.createElement(
+                "p",
+                { className: "text-center", style: style.date },
+                this.state.date
+              ),
+              React.createElement("textarea", { rows: "1", style: style.titlebox, id: "titlebox", cols: "80", defaultValue: "Existing Journal Entry", readOnly: this.state.read }),
+              React.createElement("textarea", { rows: "40", style: style.textbox, id: "entrybox", cols: "80", defaultValue: "This is an example entry. Look at all this fun text. Try to edit me.", readOnly: this.state.read }),
+              React.createElement(
+                "div",
+                { className: "text-center" },
+                React.createElement(
+                  "button",
+                  { style: style.button, onClick: function onClick() {
+                      window.location = viewLink;
+                    } },
+                  "Previous Entries"
+                ),
+                React.createElement(
+                  "button",
+                  { style: style.button, onClick: function onClick() {
+                      _this2.onEdit();
+                    } },
+                  "Edit"
+                ),
+                React.createElement(
+                  "button",
+                  { style: style.button, onClick: function onClick() {
+                      _this2.onSave();
+                    } },
+                  "Save"
+                )
+              )
+            )
+          )
         )
       );
     }

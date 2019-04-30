@@ -9,12 +9,41 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var style = {
+  root: {
+    backgroundImage: "url('https://cdn.hipwallpaper.com/i/12/15/g8VhaE.jpg')",
+    backgroundSize: 'cover',
+    overflow: "hidden"
+  },
   entryBox: {
-    maxWidth: "45%"
+    maxWidth: "100%"
   },
   button: {
-    margin: "5px"
+    margin: "10px",
+    width: "20%"
 
+  },
+  titlebox: {
+    width: "50%",
+    display: "block",
+    margin: "auto",
+    backgroundImage: "url('https://wallpaperplay.com/walls/full/8/a/d/103355.jpg')",
+    backgroundSize: 'cover',
+    overflow: "hidden"
+  },
+  textbox: {
+    width: "50%",
+    display: "block",
+    margin: "auto",
+    backgroundImage: "url('https://wallpaperplay.com/walls/full/8/a/d/103355.jpg')",
+    backgroundSize: 'cover',
+    overflow: "hidden"
+  },
+  title: {
+    color: "white",
+    margin: "10px"
+  },
+  date: {
+    color: "white"
   }
 
   // This grabs the DOM element to be used to mount React components.
@@ -101,27 +130,49 @@ var EditEntry = function (_React$Component) {
       var viewLink = "./PreviousEntriesView.html";
       return React.createElement(
         "div",
-        { style: style.entryBox },
+        null,
         React.createElement(
-          "p",
-          { style: style.date },
-          this.state.date
-        ),
-        React.createElement("textarea", { rows: "1", id: "titlebox", cols: "80", placeholder: "Write a title here..." }),
-        React.createElement("textarea", { rows: "40", id: "entrybox", cols: "80", placeholder: "Write anything here..." }),
-        React.createElement(
-          "button",
-          { style: style.button, onClick: function onClick() {
-              window.location = viewLink;
-            } },
-          "Previous Entries"
-        ),
-        React.createElement(
-          "button",
-          { style: style.button, onClick: function onClick() {
-              _this2.onSave();
-            } },
-          "Save"
+          "div",
+          { style: style.root },
+          React.createElement(
+            "div",
+            { className: "container", style: style.entryBox },
+            React.createElement(
+              "div",
+              { className: "mx-auto" },
+              React.createElement(
+                "h1",
+                { className: "text-center", style: style.title },
+                "Edit Journal Entry"
+              ),
+              React.createElement(
+                "p",
+                { className: "text-center", style: style.date },
+                "Last Opened: ",
+                this.getDate()
+              ),
+              React.createElement("textarea", { rows: "1", style: style.titlebox, id: "titlebox", cols: "80", placeholder: "Write a title here..." }),
+              React.createElement("textarea", { rows: "40", style: style.textbox, id: "entrybox", cols: "80", placeholder: "Write anything here..." }),
+              React.createElement(
+                "div",
+                { className: "text-center" },
+                React.createElement(
+                  "button",
+                  { style: style.button, onClick: function onClick() {
+                      window.location = viewLink;
+                    } },
+                  "Previous Entries"
+                ),
+                React.createElement(
+                  "button",
+                  { style: style.button, onClick: function onClick() {
+                      _this2.onSave();
+                    } },
+                  "Save"
+                )
+              )
+            )
+          )
         )
       );
     }
