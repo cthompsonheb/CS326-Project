@@ -13,26 +13,9 @@ db.entries.remove({});
 db.entries.insert(
 [
     {
-      title: 'Christmas Morning',
-      date: new Date('2018-12-25'),
-      current_text: "Christmas is an annual festival, commemorating the birth of Jesus Christ, \
-      observed primarily on December 25 as a religious and cultural celebration among billions of \
-      people around the world. A feast central to the Christian liturgical year, it is preceded \
-      by the season of Advent or the Nativity Fast and initiates the season of Christmastide, \
-      which historically in the West lasts twelve days and culminates on Twelfth Night; in some \
-      traditions, Christmastide includes an octave. Christmas Day is a public holiday in many of \
-      the world's nations, is celebrated religiously by a majority of Christians, as well as \
-      culturally by many non-Christians, and forms an integral part of the holiday season centered \
-      around it. \
-      The traditional Christmas narrative, the Nativity of Jesus, delineated in the New Testament says \
-      that Jesus was born in Bethlehem, in accordance with messianic prophecies.[22] When Joseph and \
-      Mary arrived in the city, the inn had no room and so they were offered a stable where the Christ \
-      Child was soon born, with angels proclaiming this news to shepherds who then further disseminated \
-      the information. \
-      Although the month and date of Jesus' birth are unknown, the church in the early fourth century \
-      fixed the date as December 25.[24][25][26] This corresponds to the date of the solstice on the \
-      Roman calendar. Most Christians celebrate on December 25 in the Gregorian calendar, which has \
-      been adopted almost universally in the civil calendars used in countries throughout the world."
+      title: 'Existing Journal Entry',
+      date: new Date('2019-05-02'),
+      current_text: "This is an example entry. Look at all this fun text. Try to edit me."
     },
     {
       title: 'A New Year',

@@ -11,7 +11,6 @@ const style = {
    },
    title:{
     color:"white",
-    margin: "10px",
     align: "center"
   }
 };
@@ -109,6 +108,7 @@ class PreviousEntriesList extends React.Component {
     return (
       <div style={style.root}>
       <div className="d-flex-row justify-content-between" style={{width: "80%", margin: "auto"}}>
+        <h1 className="text-center" style={style.title}>Previous Entries</h1>
         <ul className="list-group mt-3">
           {entries}
         </ul>

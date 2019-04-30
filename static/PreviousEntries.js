@@ -21,7 +21,6 @@ var style = {
   },
   title: {
     color: "white",
-    margin: "10px",
     align: "center"
   }
 };
@@ -134,6 +133,11 @@ var PreviousEntriesList = function (_React$Component) {
         React.createElement(
           "div",
           { className: "d-flex-row justify-content-between", style: { width: "80%", margin: "auto" } },
+          React.createElement(
+            "h1",
+            { className: "text-center", style: style.title },
+            "Previous Entries"
+          ),
           React.createElement(
             "ul",
             { className: "list-group mt-3" },
