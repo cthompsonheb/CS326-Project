@@ -60,7 +60,6 @@ class ViewEntry extends React.Component {
 
     return (
       <div style={style.entryBox}>
-        <h1 style={style.title}>View Journal Entry</h1>
         <p style={style.date}>{this.state.date}</p>
         <textarea rows="1" id="titlebox" cols="80" defaultValue="Existing Journal Entry" readOnly={this.state.read}>
         </textarea>

@@ -99,22 +99,6 @@ var PreviousEntriesList = function (_React$Component) {
         "div",
         { className: "d-flex-row justify-content-between", style: { width: "80%", margin: "auto" } },
         React.createElement(
-          "div",
-          { className: "d-flex mt-3" },
-          React.createElement(
-            "h1",
-            null,
-            "Previous Journal Entries"
-          ),
-          React.createElement(
-            "button",
-            { style: { marginLeft: "auto" }, type: "button", className: "btn btn-primary", onClick: function onClick() {
-                window.location = homeLink;
-              } },
-            "Home"
-          )
-        ),
-        React.createElement(
           "ul",
           { className: "list-group mt-3" },
           entries
@@ -139,7 +123,6 @@ var EntriesListItem = function (_React$Component2) {
     key: "render",
     value: function render() {
       var props = this.props;
-
       //using these to simulate changing views with an onClick function
       var editLink = "./EditView.html";
       var viewLink = "./JournalEntryView.html";

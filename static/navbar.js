@@ -12,7 +12,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var state = [];
 
 // This grabs the DOM element to be used to mount React components.
-var contentNode = document.getElementById("contents");
+var contentNode = document.getElementById("navbar");
 
 var NavigationBar = function (_React$Component) {
   _inherits(NavigationBar, _React$Component);
@@ -26,12 +26,19 @@ var NavigationBar = function (_React$Component) {
   _createClass(NavigationBar, [{
     key: "render",
     value: function render() {
+      var page = window.location.pathname;
+      var cnameEdit = void 0;
+      var cnamePrev = void 0;
+      var cnameView = void 0;
+      cnameEdit = page === "/EditView.html" ? "nav-link active" : "nav-link";
+      cnamePrev = page === "/PreviousEntriesView.html" ? "nav-link active" : "nav-link";
+      cnameView = page === "/JournalEntryView.html" ? "nav-link active" : "nav-link";
       return React.createElement(
         "nav",
         { className: "navbar navbar-expand-lg navbar-light bg-light" },
         React.createElement(
           "a",
-          { className: "navbar-brand", href: "#" },
+          { className: "navbar-brand", href: "./index.html" },
           "JournalZ"
         ),
         React.createElement(
@@ -50,8 +57,8 @@ var NavigationBar = function (_React$Component) {
               { className: "nav-item" },
               React.createElement(
                 "a",
-                { className: "nav-link", href: "EditView.html" },
-                "Current Journal Entry"
+                { className: cnameEdit, href: "EditView.html" },
+                "Edit Journal Entry"
               )
             ),
             React.createElement(
@@ -59,7 +66,7 @@ var NavigationBar = function (_React$Component) {
               { className: "nav-item" },
               React.createElement(
                 "a",
-                { className: "nav-link", href: "PreviousEntriesView.html" },
+                { className: cnamePrev, href: "PreviousEntriesView.html" },
                 "Previous Entries"
               )
             ),
@@ -68,8 +75,8 @@ var NavigationBar = function (_React$Component) {
               { className: "nav-item" },
               React.createElement(
                 "a",
-                { className: "nav-link", href: "JournalEntryView.html" },
-                "Previous Journal Entry"
+                { className: cnameView, href: "JournalEntryView.html" },
+                "View Journal Entry"
               )
             )
           )
